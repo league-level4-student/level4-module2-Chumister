@@ -32,12 +32,18 @@ public class StringMethods {
 
 	// Given Strings s1 and s2, return the longer String
 	public static String longerString(String s1, String s2) {
-		return null;
+		if (s1.length()>s2.length()) {
+			return s1;
+		}
+		return s2;
 	}
 
 	
 	// if String s contains the word "underscores", change all of the spaces to underscores
 	public static String formatSpaces(String s) {
+		if (s.contains("underscores")) {
+			s.replaceAll("underscores", "spaces");
+		}
 		return null;
 	}
 
@@ -46,12 +52,16 @@ public class StringMethods {
 	// You cannot assume there are no extra spaces around the name, but you can
 	// assume there is only one space between the first and last name
 	public static String lineLeader(String s1, String s2, String s3) {
+		for (int i = 0; i < s1.length(); i++) {
+			
+		}
 		return null;
 	}
 	
 	
 	// Return the sum of all numerical digits in the String
 	public static int numeralSum(String s) {
+		
 		return 0;
 	}
 	
@@ -63,11 +73,13 @@ public class StringMethods {
 
 	// Call Utitilities.encrypt to encrypt String s
 	public static String encrypt(String s, char key) {
+		Utilities.encrypt(s, key);
 		return null;
 	}
 
 	// Call Utilities.decrypt to decrypt the cyphertext
 	public static String decrypt(String s, char key) {
+		Utilities.decrypt(s, key);
 		return null;
 	}
 
@@ -75,6 +87,7 @@ public class StringMethods {
 	// Return the number of words in String s that end with String substring
 	// You can assume there are no punctuation marks between words
 	public static int wordsEndsWithSubstring(String s, String substring) {
+		
 		return 0;
 	}
 	
@@ -91,7 +104,10 @@ public class StringMethods {
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
 	public static boolean palindrome(String s) {
-		return true;
+		if (s.equals(s)) {
+			
+		}
+		return false;
 	}
 	
 }
