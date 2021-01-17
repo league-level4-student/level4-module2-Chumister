@@ -81,11 +81,24 @@ public class StringMethods {
 	
 	// Return the number of times String substring appears in String s
 	public static int substringCount(String s, String substring) {
+		int count = 0;
+		int lastIndex=0;
+		while (lastIndex != -1) {
+		    lastIndex = s.indexOf(substring,lastIndex);
+
+		    if( lastIndex != -1)
+		        count++;
+
+		    lastIndex += substring.length();
+		}
+
+		System.out.println(count);
 		return 0;
 	}
 
 	// Call Utitilities.encrypt to encrypt String s
 	public static String encrypt(String s, char key) {
+		
 		Utilities.encrypt(s, key);
 		return null;
 	}
@@ -117,8 +130,9 @@ public class StringMethods {
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
 	public static boolean palindrome(String s) {
-		if (s.equals(s)) {
-			
+		String reverse = new String(s);
+		if (s.equals(reverse)) {
+			return true;
 		}
 		return false;
 	}
