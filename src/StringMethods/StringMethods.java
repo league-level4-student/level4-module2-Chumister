@@ -52,8 +52,21 @@ public class StringMethods {
 	// You cannot assume there are no extra spaces around the name, but you can
 	// assume there is only one space between the first and last name
 	public static String lineLeader(String s1, String s2, String s3) {
+			String[] arr1 = s1.split(" ", 0);
+			String[] arr2 = s2.split(" ", 0);
+			String[] arr3 = s3.split(" ", 0);
+			int count = 0;
+			String temp;
+	        String str[] = new String[count];
 		for (int i = 0; i < s1.length(); i++) {
-			
+			 for (int j = i + 1; j < s2.length(); j++) { 
+	                if (str[i].compareTo(arr1[j])>0) 
+	                {
+	                    temp = arr1[i];
+	                    arr1[i] = arr1[j];
+	                    arr1[j] = temp;
+	                }
+	            }
 		}
 		return null;
 	}
@@ -120,6 +133,16 @@ class Utilities {
 			plaintext[i] = (byte) (plaintext[i] ^ key);
 		}
 		return Base64.getEncoder().encodeToString(plaintext);
+	}
+
+	public static void decrypt(String s, char key) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void encrypt(String s, char key) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public static String decrypt(String cyphertext, byte key) {
