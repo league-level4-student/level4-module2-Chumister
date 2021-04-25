@@ -41,10 +41,12 @@ public class StringMethods {
 	
 	// if String s contains the word "underscores", change all of the spaces to underscores
 	public static String formatSpaces(String s) {
+		String s1 = "";
 		if (s.contains("underscores")) {
-			s.replaceAll("underscores", "spaces");
+			s1 = s.replace(' ', '_');
+			return s1;
 		}
-		return null;
+		return s;
 	}
 
 	
@@ -52,69 +54,76 @@ public class StringMethods {
 	// You cannot assume there are no extra spaces around the name, but you can
 	// assume there is only one space between the first and last name
 	public static String lineLeader(String s1, String s2, String s3) {
-			String[] arr1 = s1.split(" ", 0);
-			String[] arr2 = s2.split(" ", 0);
-			String[] arr3 = s3.split(" ", 0);
-			int count = 0;
-			String temp;
-	        String str[] = new String[count];
-		for (int i = 0; i < s1.length(); i++) {
-			 for (int j = i + 1; j < s2.length(); j++) { 
-	                if (str[i].compareTo(arr1[j])>0) 
-	                {
-	                    temp = arr1[i];
-	                    arr1[i] = arr1[j];
-	                    arr1[j] = temp;
-	                }
-	            }
-		}
-		return null;
+			s1 = s1.trim();
+			s2 = s2.trim();
+			s3 = s3.trim();
+			String[] arr1 = s1.split(" ");
+			String s4 = arr1[1];
+			String[] arr2 = s2.split(" ");
+			String s5 = arr2[1];
+			String[] arr3 = s3.split(" ");
+			String s6 = arr3[1];
+			if (s4.charAt(0) < s5.charAt(0) && s4.charAt(0) < s6.charAt(0)) {
+				return s1;
+			} else if (s5.charAt(0) < s4.charAt(0) && s5.charAt(0) < s6.charAt(0)) {
+				return s2;
+			} else if (s6.charAt(0) < s4.charAt(0) && s6.charAt(0) < s5.charAt(0)) {
+				return s3;
+			} else {
+				return null;
+			}
 	}
 	
 	
 	// Return the sum of all numerical digits in the String
 	public static int numeralSum(String s) {
-		
-		return 0;
+		int sum = 0;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (c >= 48 && c <= 57) {
+				sum += Character.getNumericValue(c);
+			}
+		}
+		return sum;
 	}
 	
 	
 	// Return the number of times String substring appears in String s
 	public static int substringCount(String s, String substring) {
-		int count = 0;
+		String[] array = s.split(substring);
 		int lastIndex=0;
-		while (lastIndex != -1) {
-		    lastIndex = s.indexOf(substring,lastIndex);
-
-		    if( lastIndex != -1)
-		        count++;
-
-		    lastIndex += substring.length();
+		for (int i = 0; i < array.length; i++) {
+			lastIndex += array[i].length();
 		}
 
-		System.out.println(count);
-		return 0;
+		return (s.length()-lastIndex)/substring.length();
 	}
 
 	// Call Utitilities.encrypt to encrypt String s
 	public static String encrypt(String s, char key) {
 		
-		Utilities.encrypt(s, key);
-		return null;
+		return Utilities.encrypt(s.getBytes(), (byte) key);
+		
 	}
 
 	// Call Utilities.decrypt to decrypt the cyphertext
 	public static String decrypt(String s, char key) {
-		Utilities.decrypt(s, key);
-		return null;
+		
+		return Utilities.decrypt(s, (byte) key);
 	}
 
 
 	// Return the number of words in String s that end with String substring
 	// You can assume there are no punctuation marks between words
 	public static int wordsEndsWithSubstring(String s, String substring) {
-		
-		return 0;
+		String[] array = s.split(" ");
+		int words = 0;
+		for (String string : array) {
+			if (string.endsWith(substring)) {
+				words++;
+			}
+		}
+		return words;
 	}
 	
 
@@ -122,7 +131,8 @@ public class StringMethods {
 	// of String substring and the final occurrence
 	// You can assume that substring will appear at least twice
 	public static int distance(String s, String substring) {
-		return 0;
+		
+		return (s.lastIndexOf(substring)-substring.length()) - s.indexOf(substring);
 	}
 
 
@@ -130,11 +140,18 @@ public class StringMethods {
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
 	public static boolean palindrome(String s) {
-		String reverse = new String(s);
-		if (s.equals(reverse)) {
-			return true;
+		s = s.replaceAll("\\p{Punct}", " ");
+		s = s.toLowerCase();
+		s = s.replaceAll(" ", "");
+		
+		System.out.println(s);
+		
+		for(int i = 0; i<s.length()/2; i++) {
+			if(s.charAt(i) != s.charAt((s.length()-1) - i)) {
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 	
 }
